@@ -61,21 +61,26 @@ create table person(
 	phone2 varchar(50) not null,
 	email1 varchar(50) not null,
 	email2 varchar(50) not null,
-	kind ENUM('client', 'provider') not null DEFAULT 'client',
-	created_at datetime not null
+	kind_person_id int not null,
+	created_at datetime not null,
+	foreign key (kind_person_id) references kind_person(id)
 );
 
+create table kind_person(
+	id int not null auto_increment primary key,
+	kind ENUM('client', 'provider') not null DEFAULT 'client'
+);
 
 create table operation_type(
 	id int not null auto_increment primary key,
-	name ENUM('sale', 'purchase', 'in-box', 'out-box', 'fix') not null
+	operation ENUM('sale', 'purchase', 'in-box', 'out-box', 'fix') not null
 );
 
-insert into operation_type (name) value ("sale");
-insert into operation_type (name) value ("purchase");
-insert into operation_type (name) value ("in-box");
-insert into operation_type (name) value ("out-box");
-insert into operation_type (name) value ("fix");
+insert into operation_type (operation) value ("sale");
+insert into operation_type (operation) value ("purchase");
+insert into operation_type (operation) value ("in-box");
+insert into operation_type (operation) value ("out-box");
+insert into operation_type (operation) value ("fix");
 
 create table `role`(
 	id int not null auto_increment primary key,
