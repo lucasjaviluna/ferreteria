@@ -11,8 +11,7 @@ create table user(
 	is_active boolean not null default 1,
 	is_admin boolean not null default 0,
 	created_at datetime not null,
-	role int not null default 1,
-	foreign key (role) references role(id)
+	role int not null default 1
 );
 
 insert into user(name,lastname,email,password,is_active,is_admin,created_at) value ("Administrador", "","admin","90b9aa7e25f80cf4f64e990b78a9fc5ebd6cecad",1,1,NOW());
@@ -40,6 +39,7 @@ create table product(
 	category_id int,
 	created_at datetime not null,
 	is_active boolean not null default 1,
+	stock int not null,
 	foreign key (category_id) references category(id),
 	foreign key (user_id) references user(id)
 );
@@ -61,29 +61,108 @@ create table person(
 	phone2 varchar(50) not null,
 	email1 varchar(50) not null,
 	email2 varchar(50) not null,
-	kind int,
+	kind ENUM('client', 'provider') not null DEFAULT 'client',
 	created_at datetime not null
 );
 
 
 create table operation_type(
 	id int not null auto_increment primary key,
-	name ENUM('sale', 'purchase', 'in-box', 'out-box') not null
+	name ENUM('sale', 'purchase', 'in-box', 'out-box', 'fix') not null
 );
 
 insert into operation_type (name) value ("sale");
 insert into operation_type (name) value ("purchase");
 insert into operation_type (name) value ("in-box");
 insert into operation_type (name) value ("out-box");
+insert into operation_type (name) value ("fix");
 
 create table `role`(
 	id int not null auto_increment primary key,
-	rol ENUM('user', 'seller', 'administrator') not null
+	rol ENUM('administrator', 'seller') not null
 );
 
-insert into role (rol) value ("user");
-insert into role (rol) value ("seller");
 insert into role (rol) value ("administrator");
+insert into role (rol) value ("seller");
+
+
+create table `permission`(
+	id int not null auto_increment primary key,
+	name ENUM('sell', 'buy', 'box-cut', 'box-close', 'box-in', 'box-out', 'report'
+		, 'user-create', 'user-update', 'user-delete', 'provider-create'
+		, 'provider-update', 'provider-delete', 'client-create', 'client-update'
+		, 'client-delete') not null
+);
+
+insert into permission (name) value ("sell");
+insert into permission (name) value ("buy");
+insert into permission (name) value ("box-cut");
+insert into permission (name) value ("box-close");
+insert into permission (name) value ("box-in");
+insert into permission (name) value ("box-out");
+insert into permission (name) value ("report");
+insert into permission (name) value ("user-create");
+insert into permission (name) value ("user-update");
+insert into permission (name) value ("user-delete");
+insert into permission (name) value ("provider-create");
+insert into permission (name) value ("provider-update");
+insert into permission (name) value ("provider-delete");
+insert into permission (name) value ("client-create");
+insert into permission (name) value ("client-update");
+insert into permission (name) value ("client-delete");
+
+create table `permission_role`(
+	id int not null auto_increment primary key,
+	role_id int not null,
+	permission_id int not null,
+	foreign key (role_id) references role(id),
+	foreign key (permission_id) references permission(id)
+);
+
+insert into permission_role (role_id, permission_id) value (1, 1);
+insert into permission_role (role_id, permission_id) value (1, 2);
+insert into permission_role (role_id, permission_id) value (1, 3);
+insert into permission_role (role_id, permission_id) value (1, 4);
+insert into permission_role (role_id, permission_id) value (1, 5);
+insert into permission_role (role_id, permission_id) value (1, 6);
+insert into permission_role (role_id, permission_id) value (1, 7);
+insert into permission_role (role_id, permission_id) value (1, 8);
+insert into permission_role (role_id, permission_id) value (1, 9);
+insert into permission_role (role_id, permission_id) value (1, 10);
+insert into permission_role (role_id, permission_id) value (1, 11);
+insert into permission_role (role_id, permission_id) value (1, 12);
+insert into permission_role (role_id, permission_id) value (1, 13);
+insert into permission_role (role_id, permission_id) value (1, 14);
+insert into permission_role (role_id, permission_id) value (1, 15);
+insert into permission_role (role_id, permission_id) value (1, 16);
+insert into permission_role (role_id, permission_id) value (2, 1);
+insert into permission_role (role_id, permission_id) value (2, 2);
+insert into permission_role (role_id, permission_id) value (2, 3);
+insert into permission_role (role_id, permission_id) value (2, 5);
+insert into permission_role (role_id, permission_id) value (2, 6);
+insert into permission_role (role_id, permission_id) value (2, 7);
+insert into permission_role (role_id, permission_id) value (2, 11);
+insert into permission_role (role_id, permission_id) value (2, 12);
+insert into permission_role (role_id, permission_id) value (2, 13);
+insert into permission_role (role_id, permission_id) value (2, 14);
+insert into permission_role (role_id, permission_id) value (2, 15);
+insert into permission_role (role_id, permission_id) value (2, 16);
+
+create table `permission_user`(
+	id int not null auto_increment primary key,
+	user_id int not null,
+	permission_id int not null,
+	foreign key (user_id) references user(id),
+	foreign key (permission_id) references permission(id)
+);
+
+create table `role_user`(
+	id int not null auto_increment primary key,
+	user_id int not null,
+	role_id int not null,
+	foreign key (user_id) references user(id),
+	foreign key (role_id) references role(id)
+);
 
 create table box(
 	id int not null auto_increment primary key,
