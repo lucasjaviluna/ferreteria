@@ -1,3 +1,22 @@
+use ferreteria;
+
+create table user(
+	id int not null auto_increment primary key,
+	name varchar(50) not null,
+	lastname varchar(50) not null,
+	username varchar(50),
+	email varchar(255) not null,
+	password varchar(60) not null,
+	image varchar(255),
+	is_active boolean not null default 1,
+	is_admin boolean not null default 0,
+	created_at datetime not null,
+	role int not null default 1,
+	foreign key (role) references role(id)
+);
+
+insert into user(name,lastname,email,password,is_active,is_admin,created_at) value ("Administrador", "","admin","90b9aa7e25f80cf4f64e990b78a9fc5ebd6cecad",1,1,NOW());
+
 create table category(
 	id int not null auto_increment primary key,
 	image varchar(255),
@@ -49,7 +68,7 @@ create table person(
 
 create table operation_type(
 	id int not null auto_increment primary key,
-	name varchar(50) not null
+	name ENUM('sale', 'purchase', 'in-box', 'out-box') not null
 );
 
 insert into operation_type (name) value ("sale");
@@ -59,8 +78,12 @@ insert into operation_type (name) value ("out-box");
 
 create table `role`(
 	id int not null auto_increment primary key,
-	rol ENUM('user', 'client', 'provider') not null DEFAULT 'user'
+	rol ENUM('user', 'seller', 'administrator') not null
 );
+
+insert into role (rol) value ("user");
+insert into role (rol) value ("seller");
+insert into role (rol) value ("administrator");
 
 create table box(
 	id int not null auto_increment primary key,
