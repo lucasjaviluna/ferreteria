@@ -15,10 +15,10 @@ class CreateSellTable extends Migration
     {
         Schema::create('sell', function (Blueprint $table) {
              $table->increments('id');
-             $table->integer('person_id');
-             $table->integer('user_id');
-             $table->integer('operation_type_id');
-             $table->integer('box_id')->nullable();
+             $table->integer('person_id')->unsigned();
+             $table->integer('user_id')->unsigned();
+             $table->integer('operation_type_id')->unsigned();
+             $table->integer('box_id')->nullable()->unsigned();
              $table->foreign('person_id')->references('id')->on('person');
              $table->foreign('user_id')->references('id')->on('user');
              $table->foreign('operation_type_id')->references('id')->on('operation_type');

@@ -14,11 +14,11 @@ class CreateOperationTable extends Migration
      public function up() {
           Schema::create('operation', function (Blueprint $table) {
               $table->increments('id');
-              $table->integer('product_id');
+              $table->integer('product_id')->unsigned();
               $table->integer('quantity');
               $table->float('price_out', 6, 2);
-              $table->integer('operation_type_id');
-              $table->integer('sell_id')->nullable();
+              $table->integer('operation_type_id')->unsigned();
+              $table->integer('sell_id')->nullable()->unsigned();
               $table->foreign('product_id')->references('id')->on('product');
               $table->foreign('operation_type_id')->references('id')->on('operation_type');
               $table->foreign('sell_id')->references('id')->on('sell');

@@ -26,10 +26,10 @@ class CreateProductTable extends Migration
             $table->string('presentation')->nullable();
             $table->boolean('active')->default(true);
             $table->integer('stock');
-            $table->integer('category_id');
+            $table->integer('category_id')->nullable()->unsigned();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('category_id')->references->('id')->on('category');
+            $table->foreign('category_id')->references('id')->on('category');
         });
     }
 

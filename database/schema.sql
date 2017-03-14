@@ -4,21 +4,17 @@ create table user(
 	id int not null auto_increment primary key,
 	name varchar(50) not null,
 	lastname varchar(50) not null,
-	username varchar(50),
 	email varchar(255) not null,
 	password varchar(60) not null,
 	image varchar(255),
-	is_active boolean not null default 1,
-	is_admin boolean not null default 0,
-	created_at datetime not null,
-	role int not null default 1
+	active boolean not null default 1,
+	created_at datetime not null
 );
 
 insert into user(name,lastname,email,password,is_active,is_admin,created_at) value ("Administrador", "","admin","90b9aa7e25f80cf4f64e990b78a9fc5ebd6cecad",1,1,NOW());
 
 create table category(
 	id int not null auto_increment primary key,
-	image varchar(255),
 	name varchar(50) not null,
 	description text not null,
 	created_at datetime not null
@@ -36,11 +32,11 @@ create table product(
 	unit varchar(255) not null,
 	presentation varchar(255) not null,
 	user_id int not null,
-	category_id int,
+	category_id int not null,
 	created_at datetime not null,
 	is_active boolean not null default 1,
 	stock int not null,
-	foreign key (category_id) references category(id),
+	constraint 'product_category_fk' foreign key (category_id) references category(id),
 	foreign key (user_id) references user(id)
 );
 
@@ -51,7 +47,6 @@ person kind
 */
 create table person(
 	id int not null auto_increment primary key,
-	image varchar(255) not null,
 	name varchar(255) not null,
 	lastname varchar(50) not null,
 	company varchar(50) not null,

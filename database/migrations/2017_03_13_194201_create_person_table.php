@@ -24,11 +24,10 @@ class CreatePersonTable extends Migration
             $table->string('phone2')->nullable();
             $table->string('email1')->nullable();
             $table->string('email2')->nullable();
-            $table->string('image')->nullable();
-            $table->integer('kind_person_id');
+            $table->integer('kind_person_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('kind_person_id')->references->('id')->on('kind_person');
+            $table->foreign('kind_person_id')->references('id')->on('kind_person');
         });
     }
 
