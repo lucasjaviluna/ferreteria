@@ -1,3 +1,3 @@
-@foreach ($errors as $error)
-  <h2>{{ $error }}</h2>
-@endforeach
+<h1>404 ---> Not Found!!</h1>
+
+<h2>{{ $exception->getStatusCode() }} {{ $exception->getMessage() }}</h2>

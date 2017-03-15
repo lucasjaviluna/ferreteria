@@ -39,31 +39,25 @@
 </head>
 
 <body>
-
     <div id="wrapper">
-      {{-- @foreach ($users as $user)
-        <p>This is user {{ $user->nombre }}</p>
-      @endforeach --}}
-
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            @include('menues.navbar.header')
+            @if (Auth::check())
+                @include('menues.navbar.header')
 
-            @include('menues.navbar.right')
+                @include('menues.navbar.right')
 
-            @include('menues.navbar.sidebar')
+                @include('menues.navbar.sidebar')
+            @endif
         </nav>
 
-        <div id="page-wrapper">
-            @yield('content')
-        </div>
+        @yield('content')
         <!-- /#page-wrapper -->
-
     </div>
     <!-- /#wrapper -->
-
-    @include('blocks.footer')
-
+    @if (Auth::check())
+        @include('blocks.footer')
+    @endif
 </body>
 
 </html>
