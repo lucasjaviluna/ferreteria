@@ -38,6 +38,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/profile', function() {
-    return view('auth.profile');
-})->name('profile')->middleware('auth');
+Route::get('/profile', 'Auth\ProfileController@show')->name('profile');
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('users', 'Admin\AdminController@usersShow');
+});

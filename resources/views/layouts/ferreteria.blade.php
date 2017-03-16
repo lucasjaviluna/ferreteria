@@ -40,18 +40,28 @@
 
 <body>
     <div id="wrapper">
+
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            @if (Auth::check())
-                @include('menues.navbar.header')
+            <div class="container-fluid">
+                @if (Auth::check())
+                    @include('menues.navbar.header')
 
-                @include('menues.navbar.right')
+                    @include('menues.navbar.right')
 
-                @include('menues.navbar.sidebar')
-            @endif
+
+                @endif
+            </div>
         </nav>
 
-        @yield('content')
+        <div class="container-fluid">
+            <div class="row">
+                @if (Auth::check())
+                    @include('menues.navbar.sidebar')
+                @endif
+                @yield('content')
+            </div>
+        </div>
         <!-- /#page-wrapper -->
     </div>
     <!-- /#wrapper -->

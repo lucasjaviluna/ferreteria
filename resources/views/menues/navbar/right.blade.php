@@ -17,7 +17,7 @@
             </a>
             <ul class="dropdown-menu dropdown-user">
                 <li>
-                    <a href="{{ route('profile') }}"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    <a href="{{ route('profile') }}"><i class="fa fa-edit fa-fw"></i> Profile</a>
                 </li>
                 <!-- <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a></li> -->
                 <li class="divider"></li>

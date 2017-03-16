@@ -1,9 +1,11 @@
 @extends('layouts.ferreteria')
 
 @section('content')
-<div class="container">
+<!-- <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-8 col-md-offset-2"> -->
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
             <div class="panel panel-default">
                 <div class="panel-heading">User Profile</div>
                 <div class="panel-body">
@@ -14,7 +16,7 @@
                             <label for="name" class="col-md-4 control-label">Name</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="name" type="text" class="form-control" name="name" value="{{ $user->name or old('name') }}" required autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -28,7 +30,7 @@
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                <input id="email" type="email" class="form-control" name="email" value="{{ $user->email or old('email') }}" required>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -71,6 +73,6 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    <!-- </div>
+</div> -->
 @endsection
