@@ -20,7 +20,7 @@ class CreateSellTable extends Migration
              $table->integer('operation_type_id')->unsigned();
              $table->integer('box_id')->nullable()->unsigned();
              $table->foreign('person_id')->references('id')->on('person');
-             $table->foreign('user_id')->references('id')->on('user');
+             $table->foreign('user_id')->references('id')->on('users');
              $table->foreign('operation_type_id')->references('id')->on('operation_type');
              $table->foreign('box_id')->references('id')->on('box');
              $table->timestamps();

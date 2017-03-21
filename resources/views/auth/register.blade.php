@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.ferreteria')
 
 @section('content')
 <div class="container">
@@ -65,6 +65,10 @@
                                 <button type="submit" class="btn btn-primary">
                                     Register
                                 </button>
+
+                                <a class="btn btn-link" href="{{ route('login') }}">
+                                    Login
+                                </a>
                             </div>
                         </div>
                     </form>
